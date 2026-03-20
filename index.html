@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AYT KAMP — 85 Günde Full SAY</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: #2a2a3a;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --success: #10b981;
+    --danger: #ef4444;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --mat: #7c3aed;
+    --fiz: #06b6d4;
+    --kim: #f59e0b;
+    --bio: #10b981;
+    --geo: #f97316;
+    --den: #ec4899;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ANIMATED BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 40px 0 30px;
+    position: relative;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(6,182,212,0.2));
+    border: 1px solid rgba(124,58,237,0.4);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  .header-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .stat-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .stat-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent2);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* XP BAR */
+  .xp-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .xp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .level-badge {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    color: var(--accent3);
+    font-weight: 700;
+  }
+
+  .xp-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .xp-bar-bg {
+    background: var(--surface2);
+    border-radius: 99px;
+    height: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .xp-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+  }
+
+  .xp-bar-fill::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 20px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 99px;
+    filter: blur(4px);
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  /* WEEK SELECTOR */
+  .week-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .week-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .week-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .week-btn.active {
+    background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.2));
+    border-color: var(--accent);
+    color: white;
+    font-weight: 600;
+  }
+
+  .week-btn.completed {
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .week-btn.completed::after {
+    content: '✓';
+    margin-left: 4px;
+  }
+
+  /* WEEK TABLE */
+  .week-panel {
+    display: none;
+  }
+
+  .week-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .week-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--accent2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+  }
+
+  thead th {
+    background: var(--surface2);
+    padding: 12px 10px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  thead th:first-child {
+    text-align: left;
+    padding-left: 16px;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(42,42,58,0.5);
+  }
+
+  tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  tbody td {
+    padding: 6px 8px;
+    text-align: center;
+    background: var(--surface);
+  }
+
+  tbody td:first-child {
+    text-align: left;
+    padding-left: 16px;
+    background: var(--surface2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  /* TASK CHIP */
+  .task-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 9px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1.5px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .task-chip:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+
+  .task-chip.done {
+    opacity: 0.4;
+    text-decoration: line-through;
+    transform: none;
+    filter: none;
+  }
+
+  .task-chip.done:hover {
+    opacity: 0.6;
+    transform: none;
+  }
+
+  /* Subject colors */
+  .chip-mat { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.4); color: #a78bfa; }
+  .chip-fiz { background: rgba(6,182,212,0.12); border-color: rgba(6,182,212,0.35); color: #67e8f9; }
+  .chip-kim { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.35); color: #fcd34d; }
+  .chip-bio { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.35); color: #6ee7b7; }
+  .chip-geo { background: rgba(249,115,22,0.12); border-color: rgba(249,115,22,0.35); color: #fdba74; }
+  .chip-den { background: rgba(236,72,153,0.12); border-color: rgba(236,72,153,0.35); color: #f9a8d4; }
+  .chip-mola { background: rgba(100,116,139,0.12); border-color: rgba(100,116,139,0.3); color: #94a3b8; }
+  .chip-tyt { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.35); color: #fca5a5; }
+
+  .check-icon { font-size: 10px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--surface2);
+    border: 1px solid var(--success);
+    color: var(--success);
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    z-index: 999;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* EMPTY */
+  .empty-cell {
+    color: var(--border);
+    font-size: 14px;
+  }
+
+  /* RESET BTN */
+  .actions-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .btn-danger:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  /* FIRST DAY SPECIAL */
+  .first-days-section {
+    margin-bottom: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .first-days-header {
+    background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(6,182,212,0.1));
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .first-days-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    color: var(--accent2);
+    font-weight: 700;
+  }
+
+  .first-days-body {
+    display: none;
+    padding: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .first-days-body.open {
+    display: grid;
+  }
+
+  .day-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    transition: all 0.2s;
+  }
+
+  .day-card:hover {
+    border-color: var(--accent);
+  }
+
+  .day-card-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    color: var(--accent3);
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .day-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .day-task-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .day-task-item:hover {
+    border-color: var(--accent);
+    filter: brightness(1.15);
+  }
+
+  .day-task-item.done {
+    opacity: 0.35;
+    text-decoration: line-through;
+  }
+
+  .day-task-checkbox {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--muted);
+    border-radius: 3px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    transition: all 0.2s;
+  }
+
+  .day-task-item.done .day-task-checkbox {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  .day-min-time {
+    font-size: 10px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* MOTIVATION QUOTE */
+  .motivation {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 24px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(6,182,212,0.05));
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 16px;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .motivation strong {
+    color: var(--text);
+    font-style: normal;
+  }
+
+  /* Progress indicator per week button */
+  .week-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 99px;
+    transition: width 0.5s;
+  }
+
+  @media (max-width: 600px) {
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .week-btn { font-size: 10px; padding: 5px 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">⚡ Bilgin Gürek × 2026 AYT</div>
+    <h1>85 GÜNDE<br>FULL AYT</h1>
+    <div class="header-sub">// SAY KAMP TRACKER — görevleri tıkla, net'leri topla</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-value" id="stat-done">0</div>
+      <div class="stat-label">Tamamlanan</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-total">0</div>
+      <div class="stat-label">Toplam Görev</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-pct">%0</div>
+      <div class="stat-label">İlerleme</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-xp">0</div>
+      <div class="stat-label">XP Kazanılan</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-streak">🔥 0</div>
+      <div class="stat-label">Günlük Seri</div>
+    </div>
+  </div>
+
+  <!-- XP BAR -->
+  <div class="xp-section">
+    <div class="xp-header">
+      <div class="level-badge" id="level-text">⭐ LEVEL 1 — Başlangıç</div>
+      <div class="xp-text" id="xp-detail">0 / 100 XP</div>
+    </div>
+    <div class="xp-bar-bg">
+      <div class="xp-bar-fill" id="xp-bar" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#a78bfa"></span>Matematik</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#67e8f9"></span>Fizik</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#fcd34d"></span>Kimya</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#6ee7b7"></span>Biyoloji</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#fdba74"></span>Geometri</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#f9a8d4"></span>Deneme</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#fca5a5"></span>TYT</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#94a3b8"></span>Mola/Tekrar</div>
+  </div>
+
+  <!-- FIRST 5 DAYS -->
+  <div class="first-days-section">
+    <div class="first-days-header" onclick="toggleFirstDays()">
+      <div class="first-days-title">🚀 İLK 5 GÜN — Detailed Mission Log</div>
+      <span id="first-days-arrow" style="color:var(--muted);font-size:18px">▼</span>
+    </div>
+    <div class="first-days-body" id="first-days-body">
+      <!-- Day cards injected by JS -->
+    </div>
+  </div>
+
+  <!-- WEEK NAV -->
+  <div class="actions-bar">
+    <button class="btn btn-danger" onclick="resetAll()">🗑 Sıfırla</button>
+    <button class="btn" onclick="completeWeek()">✅ Haftayı Tamamla</button>
+  </div>
+
+  <div class="week-nav" id="week-nav"></div>
+
+  <!-- WEEK PANELS -->
+  <div id="week-panels"></div>
+
+  <!-- MOTIVATION -->
+  <div class="motivation">
+    <strong>"Umutsuzluğa kapılıp yapamıyorum deme."</strong><br>
+    Her yenilgi başarının bir taksididir. Senin bir idealin varken pes etmek sana yakışmaz. — Bilgin Gürek
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+const days5 = [
+  {
+    day: "1. GÜN",
+    minTime: "6 saat",
+    tasks: [
+      { label: "20 Paragraf + 20 Problem", type: "mat" },
+      { label: "Polinomlar 1-2-3 + 1 saat soru çözümü", type: "mat" },
+      { label: "Sinir Sistemi Nöron & Glialar video", type: "bio" },
+      { label: "Sinir Sistemi Aksiyon Potansiyeli video", type: "bio" },
+      { label: "Sinir Sistemi Ön Beyin video", type: "bio" },
+      { label: "Sinir Sistemi Orta&Arka Beyin video", type: "bio" },
+      { label: "Biyoloji 45 dk soru çözümü", type: "bio" },
+      { label: "TYT Matematik Branş Denemesi", type: "den" },
+    ]
+  },
+  {
+    day: "2. GÜN",
+    minTime: "7 saat",
+    tasks: [
+      { label: "Türkçe Denemesi + TYT Fen Denemesi", type: "den" },
+      { label: "Vektörler 1-2-3 + Soru Çözümü video", type: "fiz" },
+      { label: "Fizik 1 saat soru çözümü", type: "fiz" },
+      { label: "Atomun Kuantum Modeli 1-2 video", type: "kim" },
+      { label: "Periyodik Sistem & Orbitallere Dizilim video", type: "kim" },
+      { label: "İyonların Elektron Dağılımı video", type: "kim" },
+      { label: "Kimya 1 saat soru çözümü", type: "kim" },
+      { label: "Biyoloji Tekrar (OGM Materyal, 30 dk)", type: "bio" },
+      { label: "Analitik Geometri 1-2 video", type: "geo" },
+      { label: "Analitik Geometri 1-2 test", type: "geo" },
+    ]
+  },
+  {
+    day: "3. GÜN",
+    minTime: "7 saat",
+    tasks: [
+      { label: "20 Paragraf + 20 Problem", type: "mat" },
+      { label: "Polinom tekrar + 20 dk soru çözümü", type: "mat" },
+      { label: "Polinomlar 4-5-6 + 30 dk soru çözümü", type: "mat" },
+      { label: "Biyoloji OGM tekrar", type: "bio" },
+      { label: "Sinir Sistemi Omurilik video", type: "bio" },
+      { label: "Sinir Sistemi ÇSS & Hastalıklar video", type: "bio" },
+      { label: "Sinir Sistemi Checkpoint video", type: "bio" },
+      { label: "Endokrin Sistem Hipotalamus video", type: "bio" },
+      { label: "Biyoloji 45 dk soru çözümü", type: "bio" },
+      { label: "2 Sosyal + 2 Fen Denemesi (80 dk)", type: "den" },
+      { label: "TYT Tekrar (1 saat)", type: "tyt" },
+    ]
+  },
+  {
+    day: "4. GÜN",
+    minTime: "7.5 saat",
+    tasks: [
+      { label: "Türkçe + TYT Fen Denemesi", type: "den" },
+      { label: "Vektör tekrar + 20 dk soru çözümü", type: "fiz" },
+      { label: "Bağıl Hareket 1 video + deney", type: "fiz" },
+      { label: "Bağıl Hareket 2 video + 30 dk soru çözümü", type: "fiz" },
+      { label: "Kimya OGM Tekrar (20-30 dk)", type: "kim" },
+      { label: "Modern Atom Teorisi 20-25 dk soru çözümü", type: "kim" },
+      { label: "Periyodik Sistemde Yer Bulma video", type: "kim" },
+      { label: "Periyodik Özellikler 1-2 video", type: "kim" },
+      { label: "Periyodik Özellikler 30 dk soru çözümü", type: "kim" },
+      { label: "TYT Tekrar veya Sosyal Deneme (1 saat)", type: "tyt" },
+      { label: "Analitik Geometri 3-4 video", type: "geo" },
+      { label: "Analitik Geometri 1-2 test", type: "geo" },
+    ]
+  },
+  {
+    day: "5. GÜN",
+    minTime: "7.5 saat",
+    tasks: [
+      { label: "20 Paragraf", type: "mat" },
+      { label: "Polinom 30 dk soru çözümü", type: "mat" },
+      { label: "Polinomlar 7-8 video", type: "mat" },
+      { label: "Polinomlar 9 Bölüm Bitirme Testi", type: "mat" },
+      { label: "Sinir Sistemi 30 dk soru çözümü", type: "bio" },
+      { label: "Endokrin Sistem Hipofiz video", type: "bio" },
+      { label: "Geometri 1 saat karma soru çözümü", type: "geo" },
+      { label: "TYT Matematik Denemesi", type: "den" },
+      { label: "YouTube Video 1 (linkteki)", type: "bio" },
+      { label: "YouTube Video 2 (linkteki)", type: "bio" },
+    ]
+  }
+];
+
+const weeks = [
+  {
+    id: 1,
+    rows: [
+      ["Blok 1", "Fonksiyonlar", "TYT Mat Denemesi", "Türkçe Denemesi", "Modern Atom Teorisi", "Fonksiyonlar", "TYT Mat Denemesi", "Yapamadığın Sorulara Dön"],
+      ["Blok 2", "Fonksiyonlar", "Vektörler", "Fonksiyonlar", "Modern Atom Teorisi", "Fonksiyonlar", "Vektörler", "TYT konu eksikliklerine dön"],
+      ["Blok 3", "Vektörler", "Fonksiyonlar", "Fonksiyonlar", "Sinir Sistemi", "Geometri", "Vektörler", "TYT konu eksikliklerine dön"],
+      ["Blok 4", "Vektörler", "Fonksiyonlar", "Sinir Sistemi", "Sinir Sistemi", "Geometri", "Modern Atom Teorisi", "MOLA"],
+      ["Blok 5", "x2 TYT Fen+Sosyal Denemesi", "TYT Mat Denemesi Analizi", "Sinir Sistemi", "x2 TYT Fen+Sosyal Denemesi", "Türkçe Denemesi", "TYT Mat Denemesi Analizi", "MOLA"],
+    ]
+  },
+  {
+    id: 2,
+    rows: [
+      ["Blok 1", "Fonksiyonlar", "TYT Mat Denemesi", "Bağıl Hareket", "İkinci Derece Denklemler", "İkinci Derece Denklemler", "Türkçe Denemesi", "Kesişen Kuvvetlerin Dengesi"],
+      ["Blok 2", "Fonksiyonlar", "Sinir Sistemi", "Bağıl Hareket", "İkinci Derece Denklemler", "İkinci Derece Denklemler", "x2 TYT Fen+Sosyal Denemesi", "Kesişen Kuvvetlerin Dengesi"],
+      ["Blok 3", "Modern Atom Teorisi", "Sinir Sistemi", "İkinci Derece Denklemler", "Sinir Sistemi", "Bağıl Hareket", "İkinci Derece Denklemler", "Polinomlar"],
+      ["Blok 4", "Modern Atom Teorisi", "Modern Atom Teorisi", "İkinci Derece Denklemler", "Sinir Sistemi", "Bağıl Hareket", "Endokrin Sistem", "Polinomlar"],
+      ["Blok 5", "x2 TYT Fen+Sosyal Denemesi", "TYT Mat Denemesi Analizi", "Türkçe Denemesi", "Geometri", "Geometri", "Endokrin Sistem", "Geometri"],
+    ]
+  },
+  {
+    id: 3,
+    rows: [
+      ["Blok 1", "Periyodik Sistem", "x2 TYT Fen+Sosyal Denemesi", "Kesişen Kuvvetlerin Dengesi", "TYT Mat Denemesi", "Tork ve Denge", "TYT GENEL DENEME", "Yapamadığın Sorulara Dön"],
+      ["Blok 2", "Periyodik Sistem", "Endokrin Sistem", "Kesişen Kuvvetlerin Dengesi", "Periyodik Sistem", "Tork ve Denge", "Deneme Analizi", "TYT konu eksikliklerine dön"],
+      ["Blok 3", "Polinomlar", "Endokrin Sistem", "Polinomlar", "Periyodik Sistem", "Karmaşık Sayılar", "", "TYT konu eksikliklerine dön"],
+      ["Blok 4", "Polinomlar", "Polinomlar", "Polinomlar", "Polinomlar", "Karmaşık Sayılar", "Karmaşık Sayılar", "MOLA"],
+      ["Blok 5", "TYT Mat Denemesi", "Polinomlar", "Geometri", "TYT Mat Denemesi Analizi", "Geometri", "Karmaşık Sayılar", "MOLA"],
+    ]
+  },
+  {
+    id: 4,
+    rows: [
+      ["Blok 1", "Endokrin Sistem", "TYT Mat Denemesi", "Parabol", "Türkçe Denemesi", "Parabol", "TYT Mat Denemesi", "x2 TYT Fen+Sosyal Denemesi"],
+      ["Blok 2", "Endokrin Sistem", "Tork ve Denge", "Parabol", "Parabol", "Parabol", "Duyu Organları", "Önceki konular tekrar"],
+      ["Blok 3", "Periyodik Sistem", "Tork ve Denge", "Duyu Organları", "Parabol", "Tork ve Denge", "Duyu Organları", "Önceki konular tekrar"],
+      ["Blok 4", "Periyodik Sistem", "Periyodik Sistem", "Duyu Organları", "Tork ve Denge", "Gazlar", "Kütle ve Ağırlık Merkezi", "Önceki konular tekrar"],
+      ["Blok 5", "Geometri", "TYT Mat Denemesi Analizi", "Geometri", "Tork ve Denge", "Geometri", "Kütle ve Ağırlık Merkezi", "Önceki konular tekrar"],
+    ]
+  },
+  {
+    id: 5,
+    rows: [
+      ["Blok 1", "Parabol", "Türkçe Denemesi", "Eşitsizlikler", "Eşitsizlikler", "Gazlar", "Eşitsizlikler", "Gazlar"],
+      ["Blok 2", "Parabol", "Basit Makineler", "Eşitsizlikler", "Eşitsizlikler", "Gazlar", "Eşitsizlikler", "Gazlar"],
+      ["Blok 3", "Duyu Organları", "Eşitsizlikler", "Basit Makineler", "Gazlar", "Basit Makineler", "Destek ve Hareket Sistemi", "Newton'un Hareket Yasaları"],
+      ["Blok 4", "Duyu Organları", "Eşitsizlikler", "Basit Makineler", "Gazlar", "Basit Makineler", "Destek ve Hareket Sistemi", "Newton'un Hareket Yasaları"],
+      ["Blok 5", "Geometri", "Gazlar", "x2 TYT Fen+Sosyal Denemesi", "TYT Mat Denemesi", "Geometri", "Geometri", "Trigonometri"],
+    ]
+  },
+  {
+    id: 6,
+    rows: [
+      ["Blok 1", "Trigonometri", "Türkçe Denemesi", "TYT Mat Denemesi", "Trigonometri", "Çözünürlük/Molarite", "Trigonometri", "Yapamadığın Sorulara Dön"],
+      ["Blok 2", "Trigonometri", "Trigonometri", "Newton'un Hareket Yasaları", "Trigonometri", "Çözünürlük/Molarite", "Trigonometri", "TYT konu eksikliklerine dön"],
+      ["Blok 3", "Newton'un Hareket Yasaları", "Trigonometri", "Newton'un Hareket Yasaları", "Destek ve Hareket Sistemi", "Trigonometri", "Enerji", "TYT konu eksikliklerine dön"],
+      ["Blok 4", "Newton'un Hareket Yasaları", "Destek ve Hareket Sistemi", "Çözünürlük/Molarite", "Destek ve Hareket Sistemi", "Trigonometri", "Enerji", "MOLA"],
+      ["Blok 5", "Gazlar", "Destek ve Hareket Sistemi", "Çözünürlük/Molarite", "Geometri", "Geometri", "x2 TYT Fen+Sosyal Denemesi", "MOLA"],
+    ]
+  },
+  {
+    id: 7,
+    rows: [
+      ["Blok 1", "Sindirim Sistemi", "Fizik Enerjisi", "Trigonometri", "Sindirim Sistemi", "Trigonometri", "TYT GENEL DENEME", "x2 TYT Fen+Sosyal Denemesi"],
+      ["Blok 2", "Sindirim Sistemi", "Fizik Enerjisi", "Trigonometri", "Sindirim Sistemi", "Trigonometri", "Deneme Analizi", "Önceki konular tekrar"],
+      ["Blok 3", "Koligatif Özellikler", "Koligatif Özellikler", "Fizik Enerjisi", "Trigonometri", "Bir Boyutta Sabit İvmeli Hareket", "Çözünürlük", "Önceki konular tekrar"],
+      ["Blok 4", "Trigonometri", "Koligatif Özellikler", "Fizik Enerjisi", "Trigonometri", "Bir Boyutta Sabit İvmeli Hareket", "Çözünürlük", "Önceki konular tekrar"],
+      ["Blok 5", "Trigonometri", "Geometri", "TYT Mat Denemesi", "Türkçe Denemesi", "Geometri", "MOLA", "Önceki konular tekrar"],
+    ]
+  },
+  {
+    id: 8,
+    rows: [
+      ["Blok 1", "Logaritma", "TYT Mat Denemesi", "Logaritma", "Atışlar", "Kimyasal Tepkimelerde Enerji-Entalpi", "Dolaşım ve Bağışıklık Sistemi", "x2 TYT Fen+Sosyal Denemesi"],
+      ["Blok 2", "Logaritma", "Çözünürlük", "Logaritma", "Atışlar", "Kimyasal Tepkimelerde Enerji-Entalpi", "Dolaşım ve Bağışıklık Sistemi", "Önceki konular tekrar"],
+      ["Blok 3", "Sindirim Sistemi", "Bir Boyutta Sabit İvmeli Hareket", "Kimyasal Tepkimelerde Enerji-Entalpi", "Logaritma", "Atışlar", "Logaritma", "Önceki konular tekrar"],
+      ["Blok 4", "Sindirim Sistemi", "Bir Boyutta Sabit İvmeli Hareket", "Kimyasal Tepkimelerde Enerji-Entalpi", "Logaritma", "Atışlar", "Logaritma", "Önceki konular tekrar"],
+      ["Blok 5", "Geometri", "TYT Mat Denemesi Analizi", "Türkçe Denemesi", "Geometri", "Logaritma", "Geometri", "Önceki konular tekrar"],
+    ]
+  },
+  {
+    id: 9,
+    rows: [
+      ["Blok 1", "Kimyasal Tepkimelerde Enerji-Entalpi", "Logaritma", "Türkçe Denemesi", "TYT Mat Denemesi", "Kimyasal Tepkimelerde Enerji-Entalpi", "Dolaşım ve Bağışıklık Sistemi", "x2 TYT Fen+Sosyal Denemesi"],
+      ["Blok 2", "Kimyasal Tepkimelerde Enerji-Entalpi", "Logaritma", "Dolaşım ve Bağışıklık Sistemi", "Diziler", "Kimyasal Tepkimelerde Enerji-Entalpi", "Dolaşım ve Bağışıklık Sistemi", "Önceki konular tekrar"],
+      ["Blok 3", "Logaritma", "Atışlar", "Dolaşım ve Bağışıklık Sistemi", "Diziler", "Diziler", "Diziler", "Önceki konular tekrar"],
+      ["Blok 4", "Logaritma", "Atışlar", "Diziler", "İtme ve Çizgisel Momentum", "Diziler", "Diziler", "Önceki konular tekrar"],
+      ["Blok 5", "Dolaşım ve Bağışıklık Sistemi", "Dolaşım ve Bağışıklık Sistemi", "Diziler", "İtme ve Çizgisel Momentum", "Geometri", "Geometri", "Önceki konular tekrar"],
+    ]
+  },
+  {
+    id: 10,
+    rows: [
+      ["Blok 1", "Diziler", "TYT Mat Denemesi", "Türkçe Denemesi", "Kimyasal Tepkimelerde Hız", "x2 TYT Fen+Sosyal Denemesi", "TYT GENEL DENEME", "Yapamadığın Sorulara Dön"],
+      ["Blok 2", "Diziler", "Diziler", "İtme ve Çizgisel Momentum", "Kimyasal Tepkimelerde Hız", "Limit ve Süreklilik", "Deneme Analizi", "Yapamadığın Sorulara Dön"],
+      ["Blok 3", "İtme ve Çizgisel Momentum", "Diziler", "İtme ve Çizgisel Momentum", "Limit ve Süreklilik", "Limit ve Süreklilik", "Elektrik ve Manyetizma", "TYT konu eksikliklerine dön"],
+      ["Blok 4", "İtme ve Çizgisel Momentum", "Dolaşım ve Bağışıklık Sistemi", "Solunum Sistemi", "Limit ve Süreklilik", "Kimyasal Tepkimelerde Hız", "Elektrik ve Manyetizma", "TYT konu eksikliklerine dön"],
+      ["Blok 5", "Geometri", "Dolaşım ve Bağışıklık Sistemi", "Solunum Sistemi", "Geometri", "Kimyasal Tepkimelerde Hız", "MOLA", "TYT konu eksikliklerine dön"],
+    ]
+  },
+  {
+    id: 11,
+    rows: [
+      ["Blok 1", "Limit ve Süreklilik", "Türkçe Denemesi", "TYT Mat Denemesi", "Elektrik ve Manyetizma", "x2 TYT Fen+Sosyal Denemesi", "Türev", "Yapamadığın Sorulara Dön"],
+      ["Blok 2", "Limit ve Süreklilik", "Limit ve Süreklilik", "Limit ve Süreklilik", "Elektrik ve Manyetizma", "Elektrik ve Manyetizma", "Türev", "Yapamadığın Sorulara Dön"],
+      ["Blok 3", "Kimyasal Tepkimelerde Hız", "Limit ve Süreklilik", "Limit ve Süreklilik", "Geometri", "Elektrik ve Manyetizma", "Üriner Sistem", "TYT konu eksikliklerine dön"],
+      ["Blok 4", "Kimyasal Tepkimelerde Hız", "Elektrik ve Manyetizma", "Solunum Sistemi", "Limit ve Süreklilik", "Solunum Sistemi", "Üriner Sistem", "TYT konu eksikliklerine dön"],
+      ["Blok 5", "Geometri", "Elektrik ve Manyetizma", "Solunum Sistemi", "Limit ve Süreklilik", "Solunum Sistemi", "Geometri", "TYT konu eksikliklerine dön"],
+    ]
+  },
+  {
+    id: 12,
+    rows: [
+      ["Blok 1", "Türev", "Elektrik ve Manyetizma", "Türkçe Denemesi", "TYT Mat Denemesi", "Türev", "TYT GENEL DENEME", "x2 TYT Fen+Sosyal Denemesi"],
+      ["Blok 2", "Türev", "Elektrik ve Manyetizma", "Türev", "Türev", "Türev", "Deneme Analizi", "Önceki konular tekrar"],
+      ["Blok 3", "Elektrik ve Manyetizma", "Geometri", "Türev", "Türev", "Elektrik ve Manyetizma", "Türev", "Önceki konular tekrar"],
+      ["Blok 4", "Elektrik ve Manyetizma", "Türev", "Kimyasal Tepkimelerde Hız", "Üriner Sistem", "Elektrik ve Manyetizma", "Kimyasal Tepkimelerde Denge", "Önceki konular tekrar"],
+      ["Blok 5", "Kimyasal Tepkimelerde Hız", "Türev", "Kimyasal Tepkimelerde Hız", "Geometri", "Geometri", "Kimyasal Tepkimelerde Denge", "Önceki konular tekrar"],
+    ]
+  },
+  {
+    id: 13,
+    rows: [
+      ["Blok 1", "Türev", "Elektrik ve Manyetizma", "Türev", "Türkçe Denemesi", "TYT Mat Denemesi", "TYT GENEL DENEME", "x2 TYT Fen+Sosyal Denemesi"],
+      ["Blok 2", "Türev", "Elektrik ve Manyetizma", "Türev", "Kimyasal Tepkimelerde Denge", "Kimyasal Tepkimelerde Denge", "Deneme Analizi", "Elektrik ve Manyetizma"],
+      ["Blok 3", "Geometri", "Üriner Sistem", "Kimyasal Tepkimelerde Denge", "Kimyasal Tepkimelerde Denge", "Kimyasal Tepkimelerde Denge", "Türev", "Elektrik ve Manyetizma"],
+      ["Blok 4", "Elektrik ve Manyetizma", "Üriner Sistem", "Kimyasal Tepkimelerde Denge", "Türev", "Elektrik ve Manyetizma", "Üriner Sistem", "Kimyasal Tepkimelerde Denge"],
+      ["Blok 5", "Elektrik ve Manyetizma", "Geometri", "Geometri", "Türev", "Elektrik ve Manyetizma", "Üriner Sistem", "Kimyasal Tepkimelerde Denge"],
+    ]
+  },
+  {
+    id: 14,
+    rows: [
+      ["Blok 1", "Elektrik ve Manyetizma", "Kimyasal Tepkimelerde Denge", "İntegral", "Redoks - Elektroliz", "Redoks - Elektroliz", "TYT GENEL DENEME", "Redoks - Elektroliz"],
+      ["Blok 2", "Elektrik ve Manyetizma", "Kimyasal Tepkimelerde Denge", "İntegral", "Redoks - Elektroliz", "Redoks - Elektroliz", "Deneme Analizi", "Redoks - Elektroliz"],
+      ["Blok 3", "Üreme Sistemi", "Üreme Sistemi", "Genden Proteine", "Elektrik ve Manyetizma", "İntegral", "İntegral", "Üreme Sistemi"],
+      ["Blok 4", "Üreme Sistemi", "Üreme Sistemi", "Elektrik ve Manyetizma", "Elektrik ve Manyetizma", "İntegral", "İntegral", "Üreme Sistemi"],
+      ["Blok 5", "Geometri", "İntegral", "Elektrik ve Manyetizma", "TYT Mat Denemesi", "Türkçe Denemesi", "Redoks - Elektroliz", "Geometri"],
+    ]
+  },
+  {
+    id: 15,
+    rows: [
+      ["Blok 1", "İntegral", "Çembersel Hareket", "Organik Kimya", "Üreme Sistemi", "Basit Harmonik Hareket", "Organik Kimya", "AYT Fizik Dalgalar"],
+      ["Blok 2", "İntegral", "Çembersel Hareket", "Organik Kimya", "Üreme Sistemi", "Basit Harmonik Hareket", "Organik Kimya", "AYT Fizik Dalgalar"],
+      ["Blok 3", "Çembersel Hareket", "Organik Kimya", "Çembersel Hareket", "Çembersel Hareket", "İntegral", "Basit Harmonik Hareket", "Bitkiler"],
+      ["Blok 4", "Çembersel Hareket", "Organik Kimya", "Çembersel Hareket", "Çembersel Hareket", "Üreme Sistemi", "Basit Harmonik Hareket", "Bitkiler"],
+      ["Blok 5", "Geometri", "Fotosentez-Kemosentez-Solunum", "İntegral", "Fotosentez-Kemosentez-Solunum", "Üreme Sistemi", "İntegral", "İntegral"],
+    ]
+  },
+];
+
+const days = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"];
+
+function getType(label) {
+  const l = label.toLowerCase();
+  if (l.includes("mola")) return "mola";
+  if (l.includes("denem")) return "den";
+  if (l.includes("tyt")) return "tyt";
+  if (l.includes("mat") || l.includes("polinomlar") || l.includes("fonk") || l.includes("logaritma") || l.includes("karmaşık") || l.includes("dizi") || l.includes("eşit") || l.includes("parabol") || l.includes("limit") || l.includes("türev") || l.includes("integral") || l.includes("trigon")) return "mat";
+  if (l.includes("fizik") || l.includes("vektör") || l.includes("bağıl") || l.includes("tork") || l.includes("newton") || l.includes("enerji") || l.includes("atış") || l.includes("itme") || l.includes("momentum") || l.includes("hareket") || l.includes("çembersel") || l.includes("harmonik") || l.includes("dalga") || l.includes("basit mak") || l.includes("destek ve h") || l.includes("kütle") || l.includes("ağırlık") || l.includes("kesişen")) return "fiz";
+  if (l.includes("kimya") || l.includes("atom") || l.includes("periyodik") || l.includes("çözünür") || l.includes("molarite") || l.includes("tepkim") || l.includes("koligatif") || l.includes("redoks") || l.includes("organik") || l.includes("elektroliz") || l.includes("solunum sistemi") || l.includes("dolaşım") || l.includes("gazlar")) return "kim";
+  if (l.includes("biyo") || l.includes("sinir") || l.includes("endokrin") || l.includes("sindirim") || l.includes("sindirim") || l.includes("üreme") || l.includes("üriner") || l.includes("bağışıklık") || l.includes("duyu") || l.includes("fotosentez") || l.includes("bitkiler") || l.includes("genden") || l.includes("solunum sis") || l.includes("dolaşım ve")) return "bio";
+  if (l.includes("geometri") || l.includes("analitik") || l.includes("trigon")) return "geo";
+  if (l.includes("yapamadığın") || l.includes("önceki") || l.includes("tekrar")) return "mola";
+  return "mat";
+}
+
+// State
+let state = {};
+
+function loadState() {
+  try {
+    const s = localStorage.getItem('ayt_kamp_state');
+    if (s) state = JSON.parse(s);
+  } catch(e) {}
+}
+
+function saveState() {
+  try { localStorage.setItem('ayt_kamp_state', JSON.stringify(state)); } catch(e) {}
+}
+
+function getKey(weekId, row, col) {
+  return `w${weekId}_r${row}_c${col}`;
+}
+
+function getDayKey(day, idx) {
+  return `d${day}_t${idx}`;
+}
+
+// Render first 5 days
+function renderFirstDays() {
+  const container = document.getElementById('first-days-body');
+  container.innerHTML = '';
+  days5.forEach((d, di) => {
+    const card = document.createElement('div');
+    card.className = 'day-card';
+    
+    const completed = d.tasks.filter((t, ti) => state[getDayKey(di, ti)]).length;
+    card.innerHTML = `
+      <div class="day-card-title">
+        <span>⚡ ${d.day}</span>
+        <span style="font-size:10px;color:var(--muted)">${completed}/${d.tasks.length}</span>
+      </div>
+      <div class="day-tasks" id="day-tasks-${di}"></div>
+      <div class="day-min-time">⏱ Min. Çalışma: <strong>${d.minTime}</strong></div>
+    `;
+    container.appendChild(card);
+    
+    const taskContainer = card.querySelector(`#day-tasks-${di}`);
+    d.tasks.forEach((t, ti) => {
+      const key = getDayKey(di, ti);
+      const done = !!state[key];
+      const item = document.createElement('div');
+      item.className = `day-task-item chip-${t.type} ${done ? 'done' : ''}`;
+      item.innerHTML = `
+        <div class="day-task-checkbox">${done ? '✓' : ''}</div>
+        <span>${t.label}</span>
+      `;
+      item.onclick = () => toggleDayTask(di, ti, item, key);
+      taskContainer.appendChild(item);
+    });
+  });
+}
+
+function toggleDayTask(di, ti, el, key) {
+  state[key] = !state[key];
+  saveState();
+  el.classList.toggle('done');
+  el.querySelector('.day-task-checkbox').textContent = state[key] ? '✓' : '';
+  if (state[key]) showToast('✅ Görev tamamlandı! +10 XP');
+  updateStats();
+}
+
+function toggleFirstDays() {
+  const body = document.getElementById('first-days-body');
+  const arrow = document.getElementById('first-days-arrow');
+  body.classList.toggle('open');
+  arrow.textContent = body.classList.contains('open') ? '▲' : '▼';
+}
+
+// Render week nav + panels
+function renderWeeks() {
+  const nav = document.getElementById('week-nav');
+  const panels = document.getElementById('week-panels');
+  nav.innerHTML = '';
+  panels.innerHTML = '';
+  
+  weeks.forEach((week, wi) => {
+    // Button
+    const btn = document.createElement('button');
+    btn.className = `week-btn ${wi === 0 ? 'active' : ''}`;
+    btn.id = `week-btn-${week.id}`;
+    btn.textContent = `${week.id}. Hafta`;
+    btn.style.position = 'relative';
+    btn.style.overflow = 'hidden';
+    
+    const prog = document.createElement('div');
+    prog.className = 'week-progress';
+    prog.id = `week-prog-${week.id}`;
+    btn.appendChild(prog);
+    
+    btn.onclick = () => switchWeek(week.id);
+    nav.appendChild(btn);
+    
+    // Panel
+    const panel = document.createElement('div');
+    panel.className = `week-panel ${wi === 0 ? 'active' : ''}`;
+    panel.id = `week-panel-${week.id}`;
+    
+    panel.innerHTML = `
+      <div class="week-title">📅 ${week.id}. HAFTA</div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Blok</th>
+              ${days.map(d => `<th>${d}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody id="week-tbody-${week.id}"></tbody>
+        </table>
+      </div>
+    `;
+    panels.appendChild(panel);
+    
+    const tbody = panel.querySelector(`#week-tbody-${week.id}`);
+    week.rows.forEach((row, ri) => {
+      const tr = document.createElement('tr');
+      row.forEach((cell, ci) => {
+        const td = document.createElement('td');
+        if (ci === 0) {
+          td.textContent = cell;
+        } else if (!cell) {
+          td.innerHTML = '<span class="empty-cell">—</span>';
+        } else {
+          const type = getType(cell);
+          const key = getKey(week.id, ri, ci);
+          const done = !!state[key];
+          const chip = document.createElement('span');
+          chip.className = `task-chip chip-${type} ${done ? 'done' : ''}`;
+          chip.innerHTML = `<span class="check-icon">${done ? '✓' : '○'}</span>${cell}`;
+          chip.onclick = () => toggleTask(week.id, ri, ci, chip, key);
+          td.appendChild(chip);
+        }
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+  });
+}
+
+function switchWeek(id) {
+  document.querySelectorAll('.week-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`week-panel-${id}`).classList.add('active');
+  document.getElementById(`week-btn-${id}`).classList.add('active');
+}
+
+function toggleTask(weekId, ri, ci, chip, key) {
+  state[key] = !state[key];
+  saveState();
+  chip.classList.toggle('done');
+  chip.querySelector('.check-icon').textContent = state[key] ? '✓' : '○';
+  if (state[key]) showToast('🔥 +10 XP kazandın!');
+  updateStats();
+  updateWeekProgress();
+}
+
+// STATS
+function updateStats() {
+  // Count all tasks
+  let total = 0;
+  let done = 0;
+  
+  // First 5 days
+  days5.forEach((d, di) => {
+    d.tasks.forEach((t, ti) => {
+      total++;
+      if (state[getDayKey(di, ti)]) done++;
+    });
+  });
+  
+  // Weeks
+  weeks.forEach(week => {
+    week.rows.forEach((row, ri) => {
+      row.forEach((cell, ci) => {
+        if (ci > 0 && cell) {
+          total++;
+          if (state[getKey(week.id, ri, ci)]) done++;
+        }
+      });
+    });
+  });
+  
+  document.getElementById('stat-done').textContent = done;
+  document.getElementById('stat-total').textContent = total;
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+  document.getElementById('stat-pct').textContent = '%' + pct;
+  
+  const xp = done * 10;
+  document.getElementById('stat-xp').textContent = xp;
+  
+  // Level
+  const level = Math.floor(xp / 100) + 1;
+  const levelNames = ["Başlangıç", "Çömlek", "Umutlu", "Kararlı", "Azimli", "Güçlü", "Ustalaşan", "Elit", "Champion", "AYT Master", "EFSANE"];
+  const lname = levelNames[Math.min(level - 1, levelNames.length - 1)];
+  document.getElementById('level-text').textContent = `⭐ LEVEL ${level} — ${lname}`;
+  
+  const xpInLevel = xp % 100;
+  document.getElementById('xp-detail').textContent = `${xpInLevel} / 100 XP`;
+  document.getElementById('xp-bar').style.width = xpInLevel + '%';
+  
+  // Streak (simple: total done as streak proxy)
+  document.getElementById('stat-streak').textContent = `🔥 ${Math.floor(done / 5)}`;
+}
+
+function updateWeekProgress() {
+  weeks.forEach(week => {
+    let total = 0, done = 0;
+    week.rows.forEach((row, ri) => {
+      row.forEach((cell, ci) => {
+        if (ci > 0 && cell) {
+          total++;
+          if (state[getKey(week.id, ri, ci)]) done++;
+        }
+      });
+    });
+    const pct = total > 0 ? (done / total * 100) : 0;
+    const prog = document.getElementById(`week-prog-${week.id}`);
+    if (prog) prog.style.width = pct + '%';
+    
+    const btn = document.getElementById(`week-btn-${week.id}`);
+    if (pct === 100 && btn) btn.classList.add('completed');
+    else if (btn) btn.classList.remove('completed');
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function resetAll() {
+  if (confirm('Tüm ilerlemeyi sıfırlamak istediğine emin misin? Bu geri alınamaz!')) {
+    state = {};
+    saveState();
+    location.reload();
+  }
+}
+
+function completeWeek() {
+  const active = document.querySelector('.week-panel.active');
+  if (!active) return;
+  const weekId = parseInt(active.id.split('-')[2]);
+  const week = weeks.find(w => w.id === weekId);
+  if (!week) return;
+  week.rows.forEach((row, ri) => {
+    row.forEach((cell, ci) => {
+      if (ci > 0 && cell) {
+        state[getKey(weekId, ri, ci)] = true;
+      }
+    });
+  });
+  saveState();
+  location.reload();
+}
+
+// INIT
+loadState();
+renderFirstDays();
+renderWeeks();
+updateStats();
+updateWeekProgress();
+</script>
+</body>
+</html>
