@@ -599,6 +599,47 @@
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
     .week-btn { font-size: 10px; padding: 5px 10px; }
   }
+
+  /* BLOK CARD GRID - replaces table */
+  .blok-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .blok-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: border-color 0.2s;
+  }
+
+  .blok-card:hover {
+    border-color: rgba(124,58,237,0.35);
+  }
+
+  .blok-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    min-width: 52px;
+    padding-top: 4px;
+  }
+
+  .blok-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
 </style>
 </head>
 <body>
@@ -715,9 +756,7 @@ const days5 = [
       { label: "Türkçe Denemesi + TYT Fen Denemesi", type: "den" },
       { label: "Vektörler 1-2-3 + Soru Çözümü video", type: "fiz" },
       { label: "Fizik 1 saat soru çözümü", type: "fiz" },
-      { label: "Atomun Kuantum Modeli 1-2 video", type: "kim" },
-      { label: "Periyodik Sistem & Orbitallere Dizilim video", type: "kim" },
-      { label: "İyonların Elektron Dağılımı video", type: "kim" },
+      { label: "Periyodik Sistem video (Orbitallerden devam)", type: "kim" },
       { label: "Kimya 1 saat soru çözümü", type: "kim" },
       { label: "Biyoloji Tekrar (OGM Materyal, 30 dk)", type: "bio" },
       { label: "Analitik Geometri 1-2 video", type: "geo" },
@@ -750,7 +789,7 @@ const days5 = [
       { label: "Bağıl Hareket 1 video + deney", type: "fiz" },
       { label: "Bağıl Hareket 2 video + 30 dk soru çözümü", type: "fiz" },
       { label: "Kimya OGM Tekrar (20-30 dk)", type: "kim" },
-      { label: "Modern Atom Teorisi 20-25 dk soru çözümü", type: "kim" },
+      { label: "Periyodik Sistem 20-25 dk soru çözümü", type: "kim" },
       { label: "Periyodik Sistemde Yer Bulma video", type: "kim" },
       { label: "Periyodik Özellikler 1-2 video", type: "kim" },
       { label: "Periyodik Özellikler 30 dk soru çözümü", type: "kim" },
@@ -778,158 +817,142 @@ const days5 = [
 ];
 
 const weeks = [
-  {
-    id: 1,
-    rows: [
-      ["Blok 1", "Fonksiyonlar", "TYT Mat Denemesi", "Türkçe Denemesi", "Modern Atom Teorisi", "Fonksiyonlar", "TYT Mat Denemesi", "Yapamadığın Sorulara Dön"],
-      ["Blok 2", "Fonksiyonlar", "Vektörler", "Fonksiyonlar", "Modern Atom Teorisi", "Fonksiyonlar", "Vektörler", "TYT konu eksikliklerine dön"],
-      ["Blok 3", "Vektörler", "Fonksiyonlar", "Fonksiyonlar", "Sinir Sistemi", "Geometri", "Vektörler", "TYT konu eksikliklerine dön"],
-      ["Blok 4", "Vektörler", "Fonksiyonlar", "Sinir Sistemi", "Sinir Sistemi", "Geometri", "Modern Atom Teorisi", "MOLA"],
-      ["Blok 5", "x2 TYT Fen+Sosyal Denemesi", "TYT Mat Denemesi Analizi", "Sinir Sistemi", "x2 TYT Fen+Sosyal Denemesi", "Türkçe Denemesi", "TYT Mat Denemesi Analizi", "MOLA"],
-    ]
-  },
-  {
-    id: 2,
-    rows: [
-      ["Blok 1", "Fonksiyonlar", "TYT Mat Denemesi", "Bağıl Hareket", "İkinci Derece Denklemler", "İkinci Derece Denklemler", "Türkçe Denemesi", "Kesişen Kuvvetlerin Dengesi"],
-      ["Blok 2", "Fonksiyonlar", "Sinir Sistemi", "Bağıl Hareket", "İkinci Derece Denklemler", "İkinci Derece Denklemler", "x2 TYT Fen+Sosyal Denemesi", "Kesişen Kuvvetlerin Dengesi"],
-      ["Blok 3", "Modern Atom Teorisi", "Sinir Sistemi", "İkinci Derece Denklemler", "Sinir Sistemi", "Bağıl Hareket", "İkinci Derece Denklemler", "Polinomlar"],
-      ["Blok 4", "Modern Atom Teorisi", "Modern Atom Teorisi", "İkinci Derece Denklemler", "Sinir Sistemi", "Bağıl Hareket", "Endokrin Sistem", "Polinomlar"],
-      ["Blok 5", "x2 TYT Fen+Sosyal Denemesi", "TYT Mat Denemesi Analizi", "Türkçe Denemesi", "Geometri", "Geometri", "Endokrin Sistem", "Geometri"],
-    ]
-  },
-  {
-    id: 3,
-    rows: [
-      ["Blok 1", "Periyodik Sistem", "x2 TYT Fen+Sosyal Denemesi", "Kesişen Kuvvetlerin Dengesi", "TYT Mat Denemesi", "Tork ve Denge", "TYT GENEL DENEME", "Yapamadığın Sorulara Dön"],
-      ["Blok 2", "Periyodik Sistem", "Endokrin Sistem", "Kesişen Kuvvetlerin Dengesi", "Periyodik Sistem", "Tork ve Denge", "Deneme Analizi", "TYT konu eksikliklerine dön"],
-      ["Blok 3", "Polinomlar", "Endokrin Sistem", "Polinomlar", "Periyodik Sistem", "Karmaşık Sayılar", "", "TYT konu eksikliklerine dön"],
-      ["Blok 4", "Polinomlar", "Polinomlar", "Polinomlar", "Polinomlar", "Karmaşık Sayılar", "Karmaşık Sayılar", "MOLA"],
-      ["Blok 5", "TYT Mat Denemesi", "Polinomlar", "Geometri", "TYT Mat Denemesi Analizi", "Geometri", "Karmaşık Sayılar", "MOLA"],
-    ]
-  },
-  {
-    id: 4,
-    rows: [
-      ["Blok 1", "Endokrin Sistem", "TYT Mat Denemesi", "Parabol", "Türkçe Denemesi", "Parabol", "TYT Mat Denemesi", "x2 TYT Fen+Sosyal Denemesi"],
-      ["Blok 2", "Endokrin Sistem", "Tork ve Denge", "Parabol", "Parabol", "Parabol", "Duyu Organları", "Önceki konular tekrar"],
-      ["Blok 3", "Periyodik Sistem", "Tork ve Denge", "Duyu Organları", "Parabol", "Tork ve Denge", "Duyu Organları", "Önceki konular tekrar"],
-      ["Blok 4", "Periyodik Sistem", "Periyodik Sistem", "Duyu Organları", "Tork ve Denge", "Gazlar", "Kütle ve Ağırlık Merkezi", "Önceki konular tekrar"],
-      ["Blok 5", "Geometri", "TYT Mat Denemesi Analizi", "Geometri", "Tork ve Denge", "Geometri", "Kütle ve Ağırlık Merkezi", "Önceki konular tekrar"],
-    ]
-  },
-  {
-    id: 5,
-    rows: [
-      ["Blok 1", "Parabol", "Türkçe Denemesi", "Eşitsizlikler", "Eşitsizlikler", "Gazlar", "Eşitsizlikler", "Gazlar"],
-      ["Blok 2", "Parabol", "Basit Makineler", "Eşitsizlikler", "Eşitsizlikler", "Gazlar", "Eşitsizlikler", "Gazlar"],
-      ["Blok 3", "Duyu Organları", "Eşitsizlikler", "Basit Makineler", "Gazlar", "Basit Makineler", "Destek ve Hareket Sistemi", "Newton'un Hareket Yasaları"],
-      ["Blok 4", "Duyu Organları", "Eşitsizlikler", "Basit Makineler", "Gazlar", "Basit Makineler", "Destek ve Hareket Sistemi", "Newton'un Hareket Yasaları"],
-      ["Blok 5", "Geometri", "Gazlar", "x2 TYT Fen+Sosyal Denemesi", "TYT Mat Denemesi", "Geometri", "Geometri", "Trigonometri"],
-    ]
-  },
-  {
-    id: 6,
-    rows: [
-      ["Blok 1", "Trigonometri", "Türkçe Denemesi", "TYT Mat Denemesi", "Trigonometri", "Çözünürlük/Molarite", "Trigonometri", "Yapamadığın Sorulara Dön"],
-      ["Blok 2", "Trigonometri", "Trigonometri", "Newton'un Hareket Yasaları", "Trigonometri", "Çözünürlük/Molarite", "Trigonometri", "TYT konu eksikliklerine dön"],
-      ["Blok 3", "Newton'un Hareket Yasaları", "Trigonometri", "Newton'un Hareket Yasaları", "Destek ve Hareket Sistemi", "Trigonometri", "Enerji", "TYT konu eksikliklerine dön"],
-      ["Blok 4", "Newton'un Hareket Yasaları", "Destek ve Hareket Sistemi", "Çözünürlük/Molarite", "Destek ve Hareket Sistemi", "Trigonometri", "Enerji", "MOLA"],
-      ["Blok 5", "Gazlar", "Destek ve Hareket Sistemi", "Çözünürlük/Molarite", "Geometri", "Geometri", "x2 TYT Fen+Sosyal Denemesi", "MOLA"],
-    ]
-  },
-  {
-    id: 7,
-    rows: [
-      ["Blok 1", "Sindirim Sistemi", "Fizik Enerjisi", "Trigonometri", "Sindirim Sistemi", "Trigonometri", "TYT GENEL DENEME", "x2 TYT Fen+Sosyal Denemesi"],
-      ["Blok 2", "Sindirim Sistemi", "Fizik Enerjisi", "Trigonometri", "Sindirim Sistemi", "Trigonometri", "Deneme Analizi", "Önceki konular tekrar"],
-      ["Blok 3", "Koligatif Özellikler", "Koligatif Özellikler", "Fizik Enerjisi", "Trigonometri", "Bir Boyutta Sabit İvmeli Hareket", "Çözünürlük", "Önceki konular tekrar"],
-      ["Blok 4", "Trigonometri", "Koligatif Özellikler", "Fizik Enerjisi", "Trigonometri", "Bir Boyutta Sabit İvmeli Hareket", "Çözünürlük", "Önceki konular tekrar"],
-      ["Blok 5", "Trigonometri", "Geometri", "TYT Mat Denemesi", "Türkçe Denemesi", "Geometri", "MOLA", "Önceki konular tekrar"],
-    ]
-  },
-  {
-    id: 8,
-    rows: [
-      ["Blok 1", "Logaritma", "TYT Mat Denemesi", "Logaritma", "Atışlar", "Kimyasal Tepkimelerde Enerji-Entalpi", "Dolaşım ve Bağışıklık Sistemi", "x2 TYT Fen+Sosyal Denemesi"],
-      ["Blok 2", "Logaritma", "Çözünürlük", "Logaritma", "Atışlar", "Kimyasal Tepkimelerde Enerji-Entalpi", "Dolaşım ve Bağışıklık Sistemi", "Önceki konular tekrar"],
-      ["Blok 3", "Sindirim Sistemi", "Bir Boyutta Sabit İvmeli Hareket", "Kimyasal Tepkimelerde Enerji-Entalpi", "Logaritma", "Atışlar", "Logaritma", "Önceki konular tekrar"],
-      ["Blok 4", "Sindirim Sistemi", "Bir Boyutta Sabit İvmeli Hareket", "Kimyasal Tepkimelerde Enerji-Entalpi", "Logaritma", "Atışlar", "Logaritma", "Önceki konular tekrar"],
-      ["Blok 5", "Geometri", "TYT Mat Denemesi Analizi", "Türkçe Denemesi", "Geometri", "Logaritma", "Geometri", "Önceki konular tekrar"],
-    ]
-  },
-  {
-    id: 9,
-    rows: [
-      ["Blok 1", "Kimyasal Tepkimelerde Enerji-Entalpi", "Logaritma", "Türkçe Denemesi", "TYT Mat Denemesi", "Kimyasal Tepkimelerde Enerji-Entalpi", "Dolaşım ve Bağışıklık Sistemi", "x2 TYT Fen+Sosyal Denemesi"],
-      ["Blok 2", "Kimyasal Tepkimelerde Enerji-Entalpi", "Logaritma", "Dolaşım ve Bağışıklık Sistemi", "Diziler", "Kimyasal Tepkimelerde Enerji-Entalpi", "Dolaşım ve Bağışıklık Sistemi", "Önceki konular tekrar"],
-      ["Blok 3", "Logaritma", "Atışlar", "Dolaşım ve Bağışıklık Sistemi", "Diziler", "Diziler", "Diziler", "Önceki konular tekrar"],
-      ["Blok 4", "Logaritma", "Atışlar", "Diziler", "İtme ve Çizgisel Momentum", "Diziler", "Diziler", "Önceki konular tekrar"],
-      ["Blok 5", "Dolaşım ve Bağışıklık Sistemi", "Dolaşım ve Bağışıklık Sistemi", "Diziler", "İtme ve Çizgisel Momentum", "Geometri", "Geometri", "Önceki konular tekrar"],
-    ]
-  },
-  {
-    id: 10,
-    rows: [
-      ["Blok 1", "Diziler", "TYT Mat Denemesi", "Türkçe Denemesi", "Kimyasal Tepkimelerde Hız", "x2 TYT Fen+Sosyal Denemesi", "TYT GENEL DENEME", "Yapamadığın Sorulara Dön"],
-      ["Blok 2", "Diziler", "Diziler", "İtme ve Çizgisel Momentum", "Kimyasal Tepkimelerde Hız", "Limit ve Süreklilik", "Deneme Analizi", "Yapamadığın Sorulara Dön"],
-      ["Blok 3", "İtme ve Çizgisel Momentum", "Diziler", "İtme ve Çizgisel Momentum", "Limit ve Süreklilik", "Limit ve Süreklilik", "Elektrik ve Manyetizma", "TYT konu eksikliklerine dön"],
-      ["Blok 4", "İtme ve Çizgisel Momentum", "Dolaşım ve Bağışıklık Sistemi", "Solunum Sistemi", "Limit ve Süreklilik", "Kimyasal Tepkimelerde Hız", "Elektrik ve Manyetizma", "TYT konu eksikliklerine dön"],
-      ["Blok 5", "Geometri", "Dolaşım ve Bağışıklık Sistemi", "Solunum Sistemi", "Geometri", "Kimyasal Tepkimelerde Hız", "MOLA", "TYT konu eksikliklerine dön"],
-    ]
-  },
-  {
-    id: 11,
-    rows: [
-      ["Blok 1", "Limit ve Süreklilik", "Türkçe Denemesi", "TYT Mat Denemesi", "Elektrik ve Manyetizma", "x2 TYT Fen+Sosyal Denemesi", "Türev", "Yapamadığın Sorulara Dön"],
-      ["Blok 2", "Limit ve Süreklilik", "Limit ve Süreklilik", "Limit ve Süreklilik", "Elektrik ve Manyetizma", "Elektrik ve Manyetizma", "Türev", "Yapamadığın Sorulara Dön"],
-      ["Blok 3", "Kimyasal Tepkimelerde Hız", "Limit ve Süreklilik", "Limit ve Süreklilik", "Geometri", "Elektrik ve Manyetizma", "Üriner Sistem", "TYT konu eksikliklerine dön"],
-      ["Blok 4", "Kimyasal Tepkimelerde Hız", "Elektrik ve Manyetizma", "Solunum Sistemi", "Limit ve Süreklilik", "Solunum Sistemi", "Üriner Sistem", "TYT konu eksikliklerine dön"],
-      ["Blok 5", "Geometri", "Elektrik ve Manyetizma", "Solunum Sistemi", "Limit ve Süreklilik", "Solunum Sistemi", "Geometri", "TYT konu eksikliklerine dön"],
-    ]
-  },
-  {
-    id: 12,
-    rows: [
-      ["Blok 1", "Türev", "Elektrik ve Manyetizma", "Türkçe Denemesi", "TYT Mat Denemesi", "Türev", "TYT GENEL DENEME", "x2 TYT Fen+Sosyal Denemesi"],
-      ["Blok 2", "Türev", "Elektrik ve Manyetizma", "Türev", "Türev", "Türev", "Deneme Analizi", "Önceki konular tekrar"],
-      ["Blok 3", "Elektrik ve Manyetizma", "Geometri", "Türev", "Türev", "Elektrik ve Manyetizma", "Türev", "Önceki konular tekrar"],
-      ["Blok 4", "Elektrik ve Manyetizma", "Türev", "Kimyasal Tepkimelerde Hız", "Üriner Sistem", "Elektrik ve Manyetizma", "Kimyasal Tepkimelerde Denge", "Önceki konular tekrar"],
-      ["Blok 5", "Kimyasal Tepkimelerde Hız", "Türev", "Kimyasal Tepkimelerde Hız", "Geometri", "Geometri", "Kimyasal Tepkimelerde Denge", "Önceki konular tekrar"],
-    ]
-  },
-  {
-    id: 13,
-    rows: [
-      ["Blok 1", "Türev", "Elektrik ve Manyetizma", "Türev", "Türkçe Denemesi", "TYT Mat Denemesi", "TYT GENEL DENEME", "x2 TYT Fen+Sosyal Denemesi"],
-      ["Blok 2", "Türev", "Elektrik ve Manyetizma", "Türev", "Kimyasal Tepkimelerde Denge", "Kimyasal Tepkimelerde Denge", "Deneme Analizi", "Elektrik ve Manyetizma"],
-      ["Blok 3", "Geometri", "Üriner Sistem", "Kimyasal Tepkimelerde Denge", "Kimyasal Tepkimelerde Denge", "Kimyasal Tepkimelerde Denge", "Türev", "Elektrik ve Manyetizma"],
-      ["Blok 4", "Elektrik ve Manyetizma", "Üriner Sistem", "Kimyasal Tepkimelerde Denge", "Türev", "Elektrik ve Manyetizma", "Üriner Sistem", "Kimyasal Tepkimelerde Denge"],
-      ["Blok 5", "Elektrik ve Manyetizma", "Geometri", "Geometri", "Türev", "Elektrik ve Manyetizma", "Üriner Sistem", "Kimyasal Tepkimelerde Denge"],
-    ]
-  },
-  {
-    id: 14,
-    rows: [
-      ["Blok 1", "Elektrik ve Manyetizma", "Kimyasal Tepkimelerde Denge", "İntegral", "Redoks - Elektroliz", "Redoks - Elektroliz", "TYT GENEL DENEME", "Redoks - Elektroliz"],
-      ["Blok 2", "Elektrik ve Manyetizma", "Kimyasal Tepkimelerde Denge", "İntegral", "Redoks - Elektroliz", "Redoks - Elektroliz", "Deneme Analizi", "Redoks - Elektroliz"],
-      ["Blok 3", "Üreme Sistemi", "Üreme Sistemi", "Genden Proteine", "Elektrik ve Manyetizma", "İntegral", "İntegral", "Üreme Sistemi"],
-      ["Blok 4", "Üreme Sistemi", "Üreme Sistemi", "Elektrik ve Manyetizma", "Elektrik ve Manyetizma", "İntegral", "İntegral", "Üreme Sistemi"],
-      ["Blok 5", "Geometri", "İntegral", "Elektrik ve Manyetizma", "TYT Mat Denemesi", "Türkçe Denemesi", "Redoks - Elektroliz", "Geometri"],
-    ]
-  },
-  {
-    id: 15,
-    rows: [
-      ["Blok 1", "İntegral", "Çembersel Hareket", "Organik Kimya", "Üreme Sistemi", "Basit Harmonik Hareket", "Organik Kimya", "AYT Fizik Dalgalar"],
-      ["Blok 2", "İntegral", "Çembersel Hareket", "Organik Kimya", "Üreme Sistemi", "Basit Harmonik Hareket", "Organik Kimya", "AYT Fizik Dalgalar"],
-      ["Blok 3", "Çembersel Hareket", "Organik Kimya", "Çembersel Hareket", "Çembersel Hareket", "İntegral", "Basit Harmonik Hareket", "Bitkiler"],
-      ["Blok 4", "Çembersel Hareket", "Organik Kimya", "Çembersel Hareket", "Çembersel Hareket", "Üreme Sistemi", "Basit Harmonik Hareket", "Bitkiler"],
-      ["Blok 5", "Geometri", "Fotosentez-Kemosentez-Solunum", "İntegral", "Fotosentez-Kemosentez-Solunum", "Üreme Sistemi", "İntegral", "İntegral"],
-    ]
-  },
+  {id:1,rows:[
+    ["Pazartesi","Vektörler","Vektörler","Polinomlar","TYT Mat Denemesi"],
+    ["Salı","Vektörler","Vektörler","Polinomlar","Polinomlar","Türkçe Denemesi"],
+    ["Çarşamba","Polinomlar","Polinomlar","Sinir Sistemi","TYT Mat Denemesi"],
+    ["Perşembe","Polinomlar","Polinomlar","Sinir Sistemi","Sinir Sistemi","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Polinomlar","Sinir Sistemi","Sinir Sistemi","Türkçe Denemesi"],
+    ["Cumartesi","Sinir Sistemi","Periyodik Sistem","Periyodik Sistem","TYT Mat Denemesi Analizi"],
+    ["Pazar","Periyodik Sistem","Periyodik Sistem","Bağıl Hareket","Bağıl Hareket","Önceki konular tekrar"],
+  ]},
+  {id:2,rows:[
+    ["Pazartesi","Periyodik Sistem","Periyodik Sistem","Bağıl Hareket","TYT Mat Denemesi"],
+    ["Salı","Bağıl Hareket","Eşitsizlikler","Eşitsizlikler","Kesişen Kuvvetlerin Dengesi","Türkçe Denemesi"],
+    ["Çarşamba","Eşitsizlikler","Eşitsizlikler","Endokrin Sistem","TYT Mat Denemesi"],
+    ["Perşembe","Endokrin Sistem","Endokrin Sistem","Çözünürlük/Molarite","Çözünürlük/Molarite","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Endokrin Sistem","Çözünürlük/Molarite","Çözünürlük/Molarite","Türkçe Denemesi"],
+    ["Cumartesi","Kesişen Kuvvetlerin Dengesi","Kesişen Kuvvetlerin Dengesi","Tork ve Denge","TYT Mat Denemesi Analizi"],
+    ["Pazar","Kesişen Kuvvetlerin Dengesi","Tork ve Denge","Tork ve Denge","Trigonometri","Önceki konular tekrar"],
+  ]},
+  {id:3,rows:[
+    ["Pazartesi","Tork ve Denge","Tork ve Denge","Trigonometri","TYT Mat Denemesi"],
+    ["Salı","Tork ve Denge","Trigonometri","Trigonometri","Basit Makineler","Türkçe Denemesi"],
+    ["Çarşamba","Trigonometri","Trigonometri","Dolaşım ve Bağışıklık Sistemi","TYT Mat Denemesi"],
+    ["Perşembe","Trigonometri","Trigonometri","Dolaşım ve Bağışıklık Sistemi","Dolaşım ve Bağışıklık Sistemi","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Trigonometri","Trigonometri","Dolaşım ve Bağışıklık Sistemi","Türkçe Denemesi"],
+    ["Cumartesi","Dolaşım ve Bağışıklık Sistemi","Dolaşım ve Bağışıklık Sistemi","Basit Makineler","TYT GENEL DENEME"],
+    ["Pazar","Basit Makineler","Basit Makineler","Newton'un Hareket Yasaları","Newton'un Hareket Yasaları","Önceki konular tekrar"],
+  ]},
+  {id:4,rows:[
+    ["Pazartesi","Newton'un Hareket Yasaları","Newton'un Hareket Yasaları","Koligatif Özellikler","TYT Mat Denemesi"],
+    ["Salı","Koligatif Özellikler","Koligatif Özellikler","Solunum Sistemi","Solunum Sistemi","Türkçe Denemesi"],
+    ["Çarşamba","Koligatif Özellikler","Solunum Sistemi","Solunum Sistemi","TYT Mat Denemesi"],
+    ["Perşembe","Kütle ve Ağırlık Merkezi","Kütle ve Ağırlık Merkezi","Enerji","Enerji","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Kütle ve Ağırlık Merkezi","Kütle ve Ağırlık Merkezi","Enerji","Türkçe Denemesi"],
+    ["Cumartesi","Enerji","Enerji","Kimyasal Tepkimelerde Enerji-Entalpi","TYT Mat Denemesi Analizi"],
+    ["Pazar","Enerji","Kimyasal Tepkimelerde Enerji-Entalpi","Kimyasal Tepkimelerde Enerji-Entalpi","Bir Boyutta Sabit İvmeli Hareket","Önceki konular tekrar"],
+  ]},
+  {id:5,rows:[
+    ["Pazartesi","Kimyasal Tepkimelerde Enerji-Entalpi","Kimyasal Tepkimelerde Enerji-Entalpi","Üriner Sistem","TYT Mat Denemesi"],
+    ["Salı","Kimyasal Tepkimelerde Enerji-Entalpi","Üriner Sistem","Üriner Sistem","Kimyasal Tepkimelerde Hız","Türkçe Denemesi"],
+    ["Çarşamba","Üriner Sistem","Bir Boyutta Sabit İvmeli Hareket","Bir Boyutta Sabit İvmeli Hareket","TYT Mat Denemesi"],
+    ["Perşembe","Bir Boyutta Sabit İvmeli Hareket","Atışlar","Atışlar","İtme ve Çizgisel Momentum","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Atışlar","Atışlar","İtme ve Çizgisel Momentum","Türkçe Denemesi"],
+    ["Cumartesi","İtme ve Çizgisel Momentum","İtme ve Çizgisel Momentum","Türev","TYT Mat Denemesi Analizi"],
+    ["Pazar","Türev","Türev","Kimyasal Tepkimelerde Hız","Kimyasal Tepkimelerde Hız","Önceki konular tekrar"],
+  ]},
+  {id:6,rows:[
+    ["Pazartesi","Türev","Türev","Kimyasal Tepkimelerde Hız","TYT Mat Denemesi"],
+    ["Salı","Türev","Türev","Kimyasal Tepkimelerde Hız","Kimyasal Tepkimelerde Hız","Türkçe Denemesi"],
+    ["Çarşamba","Türev","Üreme Sistemi","Üreme Sistemi","TYT Mat Denemesi"],
+    ["Perşembe","Üreme Sistemi","Üreme Sistemi","Çembersel Hareket","Çembersel Hareket","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Üreme Sistemi","Üreme Sistemi","Çembersel Hareket","Türkçe Denemesi"],
+    ["Cumartesi","Çembersel Hareket","İntegral","İntegral","TYT Mat Denemesi Analizi"],
+    ["Pazar","İntegral","İntegral","Kimyasal Tepkimelerde Denge","Kimyasal Tepkimelerde Denge","Yapamadığın Sorulara Dön"],
+  ]},
+  {id:7,rows:[
+    ["Pazartesi","İntegral","İntegral","Kimyasal Tepkimelerde Denge","TYT Mat Denemesi"],
+    ["Salı","İntegral","İntegral","Kimyasal Tepkimelerde Denge","Kimyasal Tepkimelerde Denge","Türkçe Denemesi"],
+    ["Çarşamba","Kimyasal Tepkimelerde Denge","Genden Proteine","Genden Proteine","TYT Mat Denemesi"],
+    ["Perşembe","Genden Proteine","Genden Proteine","Basit Harmonik Hareket","Basit Harmonik Hareket","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Basit Harmonik Hareket","Basit Harmonik Hareket","AYT Fizik Dalgalar","Türkçe Denemesi"],
+    ["Cumartesi","AYT Fizik Dalgalar","AYT Fizik Dalgalar","Organik Kimya","TYT GENEL DENEME"],
+    ["Pazar","AYT Fizik Dalgalar","Organik Kimya","Organik Kimya","Organik Kimya","Önceki konular tekrar"],
+  ]},
+  {id:8,rows:[
+    ["Pazartesi","Organik Kimya","Organik Kimya","Fotosentez-Kemosentez-Solunum","TYT Mat Denemesi"],
+    ["Salı","Organik Kimya","Fotosentez-Kemosentez-Solunum","Fotosentez-Kemosentez-Solunum","Bitkiler","Türkçe Denemesi"],
+    ["Çarşamba","Fotosentez-Kemosentez-Solunum","Bitkiler","Bitkiler","TYT Mat Denemesi"],
+    ["Perşembe","Bitkiler","Bitkiler","Geometri","Geometri","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Geometri","Geometri","Geometri","Türkçe Denemesi"],
+    ["Cumartesi","Geometri","Geometri","Geometri","TYT Mat Denemesi Analizi"],
+    ["Pazar","Geometri","Geometri","Geometri","Geometri","Önceki konular tekrar"],
+  ]},
+  {id:9,rows:[
+    ["Pazartesi","TYT Mat Denemesi"],
+    ["Salı","Türkçe Denemesi"],
+    ["Çarşamba","TYT Mat Denemesi"],
+    ["Perşembe","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Türkçe Denemesi"],
+    ["Cumartesi","TYT Mat Denemesi Analizi"],
+    ["Pazar","Önceki konular tekrar"],
+  ]},
+  {id:10,rows:[
+    ["Pazartesi","TYT Mat Denemesi"],
+    ["Salı","Türkçe Denemesi"],
+    ["Çarşamba","TYT Mat Denemesi"],
+    ["Perşembe","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Türkçe Denemesi"],
+    ["Cumartesi","TYT GENEL DENEME"],
+    ["Pazar","Önceki konular tekrar"],
+  ]},
+  {id:11,rows:[
+    ["Pazartesi","TYT Mat Denemesi"],
+    ["Salı","Türkçe Denemesi"],
+    ["Çarşamba","TYT Mat Denemesi"],
+    ["Perşembe","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Türkçe Denemesi"],
+    ["Cumartesi","TYT Mat Denemesi Analizi"],
+    ["Pazar","Önceki konular tekrar"],
+  ]},
+  {id:12,rows:[
+    ["Pazartesi","TYT Mat Denemesi"],
+    ["Salı","Türkçe Denemesi"],
+    ["Çarşamba","TYT Mat Denemesi"],
+    ["Perşembe","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Türkçe Denemesi"],
+    ["Cumartesi","TYT GENEL DENEME"],
+    ["Pazar","Önceki konular tekrar"],
+  ]},
+  {id:13,rows:[
+    ["Pazartesi","TYT Mat Denemesi"],
+    ["Salı","Türkçe Denemesi"],
+    ["Çarşamba","TYT Mat Denemesi"],
+    ["Perşembe","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Türkçe Denemesi"],
+    ["Cumartesi","TYT GENEL DENEME"],
+    ["Pazar","Önceki konular tekrar"],
+  ]},
+  {id:14,rows:[
+    ["Pazartesi","TYT Mat Denemesi"],
+    ["Salı","Türkçe Denemesi"],
+    ["Çarşamba","TYT Mat Denemesi"],
+    ["Perşembe","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Türkçe Denemesi"],
+    ["Cumartesi","TYT GENEL DENEME"],
+    ["Pazar","Önceki konular tekrar"],
+  ]},
+  {id:15,rows:[
+    ["Pazartesi","TYT Mat Denemesi"],
+    ["Salı","Türkçe Denemesi"],
+    ["Çarşamba","TYT Mat Denemesi"],
+    ["Perşembe","x2 TYT Fen+Sosyal Denemesi"],
+    ["Cuma","Türkçe Denemesi"],
+    ["Cumartesi","TYT GENEL DENEME"],
+    ["Pazar","Önceki konular tekrar"],
+  ]},
 ];
-
 const days = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"];
 
 function getType(label) {
@@ -937,11 +960,11 @@ function getType(label) {
   if (l.includes("mola")) return "mola";
   if (l.includes("denem")) return "den";
   if (l.includes("tyt")) return "tyt";
-  if (l.includes("mat") || l.includes("polinomlar") || l.includes("fonk") || l.includes("logaritma") || l.includes("karmaşık") || l.includes("dizi") || l.includes("eşit") || l.includes("parabol") || l.includes("limit") || l.includes("türev") || l.includes("integral") || l.includes("trigon")) return "mat";
-  if (l.includes("fizik") || l.includes("vektör") || l.includes("bağıl") || l.includes("tork") || l.includes("newton") || l.includes("enerji") || l.includes("atış") || l.includes("itme") || l.includes("momentum") || l.includes("hareket") || l.includes("çembersel") || l.includes("harmonik") || l.includes("dalga") || l.includes("basit mak") || l.includes("destek ve h") || l.includes("kütle") || l.includes("ağırlık") || l.includes("kesişen")) return "fiz";
-  if (l.includes("kimya") || l.includes("atom") || l.includes("periyodik") || l.includes("çözünür") || l.includes("molarite") || l.includes("tepkim") || l.includes("koligatif") || l.includes("redoks") || l.includes("organik") || l.includes("elektroliz") || l.includes("solunum sistemi") || l.includes("dolaşım") || l.includes("gazlar")) return "kim";
-  if (l.includes("biyo") || l.includes("sinir") || l.includes("endokrin") || l.includes("sindirim") || l.includes("sindirim") || l.includes("üreme") || l.includes("üriner") || l.includes("bağışıklık") || l.includes("duyu") || l.includes("fotosentez") || l.includes("bitkiler") || l.includes("genden") || l.includes("solunum sis") || l.includes("dolaşım ve")) return "bio";
-  if (l.includes("geometri") || l.includes("analitik") || l.includes("trigon")) return "geo";
+  if (l.includes("mat") || l.includes("polinomlar") || l.includes("eşit") || l.includes("türev") || l.includes("integral") || l.includes("trigon")) return "mat";
+  if (l.includes("fizik") || l.includes("vektör") || l.includes("bağıl") || l.includes("tork") || l.includes("newton") || l.includes("enerji") || l.includes("atış") || l.includes("itme") || l.includes("momentum") || l.includes("hareket") || l.includes("çembersel") || l.includes("harmonik") || l.includes("dalga") || l.includes("basit mak") || l.includes("kütle") || l.includes("ağırlık") || l.includes("kesişen")) return "fiz";
+  if (l.includes("kimya") || l.includes("periyodik") || l.includes("çözünür") || l.includes("molarite") || l.includes("tepkim") || l.includes("koligatif") || l.includes("organik")) return "kim";
+  if (l.includes("biyo") || l.includes("sinir") || l.includes("endokrin") || l.includes("üreme") || l.includes("üriner") || l.includes("fotosentez") || l.includes("bitkiler") || l.includes("genden") || l.includes("dolaşım ve bağışıklık") || l.includes("solunum")) return "bio";
+  if (l.includes("geometri") || l.includes("analitik")) return "geo";
   if (l.includes("yapamadığın") || l.includes("önceki") || l.includes("tekrar")) return "mola";
   return "mat";
 }
@@ -1050,42 +1073,36 @@ function renderWeeks() {
     
     panel.innerHTML = `
       <div class="week-title">📅 ${week.id}. HAFTA</div>
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Blok</th>
-              ${days.map(d => `<th>${d}</th>`).join('')}
-            </tr>
-          </thead>
-          <tbody id="week-tbody-${week.id}"></tbody>
-        </table>
-      </div>
+      <div class="blok-grid" id="week-grid-${week.id}"></div>
     `;
     panels.appendChild(panel);
-    
-    const tbody = panel.querySelector(`#week-tbody-${week.id}`);
+
+    const grid = panel.querySelector(`#week-grid-${week.id}`);
     week.rows.forEach((row, ri) => {
-      const tr = document.createElement('tr');
-      row.forEach((cell, ci) => {
-        const td = document.createElement('td');
-        if (ci === 0) {
-          td.textContent = cell;
-        } else if (!cell) {
-          td.innerHTML = '<span class="empty-cell">—</span>';
-        } else {
-          const type = getType(cell);
-          const key = getKey(week.id, ri, ci);
-          const done = !!state[key];
-          const chip = document.createElement('span');
-          chip.className = `task-chip chip-${type} ${done ? 'done' : ''}`;
-          chip.innerHTML = `<span class="check-icon">${done ? '✓' : '○'}</span>${cell}`;
-          chip.onclick = () => toggleTask(week.id, ri, ci, chip, key);
-          td.appendChild(chip);
-        }
-        tr.appendChild(td);
+      const tasks = row.slice(1).filter(c => c !== "");
+      if (tasks.length === 0) return;
+      const dayCard = document.createElement('div');
+      dayCard.className = 'blok-card';
+      const dayLabel = document.createElement('div');
+      dayLabel.className = 'blok-label';
+      dayLabel.textContent = row[0];
+      dayCard.appendChild(dayLabel);
+      const chipsWrap = document.createElement('div');
+      chipsWrap.className = 'blok-chips';
+      row.slice(1).forEach((cell, i) => {
+        if (!cell) return;
+        const ci = i + 1;
+        const type = getType(cell);
+        const key = getKey(week.id, ri, ci);
+        const done = !!state[key];
+        const chip = document.createElement('span');
+        chip.className = `task-chip chip-${type} ${done ? 'done' : ''}`;
+        chip.innerHTML = `<span class="check-icon">${done ? '✓' : '○'}</span>${cell}`;
+        chip.onclick = () => toggleTask(week.id, ri, ci, chip, key);
+        chipsWrap.appendChild(chip);
       });
-      tbody.appendChild(tr);
+      dayCard.appendChild(chipsWrap);
+      grid.appendChild(dayCard);
     });
   });
 }
